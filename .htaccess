@@ -1,0 +1,31 @@
+RewriteEngine On
+
+# Перенаправление для bot/bot_added
+RewriteCond %{REQUEST_URI} ^/bot/bot_added
+RewriteCond %{REQUEST_METHOD} POST
+RewriteRule ^(.*)$ /index.php?route=bot/bot_added [QSA,L]
+
+# Перенаправление для bot/bot_removed
+RewriteCond %{REQUEST_URI} ^/bot/bot_removed
+RewriteCond %{REQUEST_METHOD} POST
+RewriteRule ^(.*)$ /index.php?route=bot/bot_removed [QSA,L]
+
+# Перенаправление для bot/bot_started
+RewriteCond %{REQUEST_URI} ^/bot/bot_started
+RewriteCond %{REQUEST_METHOD} POST
+RewriteRule ^(.*)$ /index.php?route=bot/bot_started [QSA,L]
+
+# Перенаправление для bot/message_created
+RewriteCond %{REQUEST_URI} ^/bot/message_created
+RewriteCond %{REQUEST_METHOD} POST
+RewriteRule ^(.*)$ /index.php?route=bot/message_created [QSA,L]
+
+# Перенаправление для bot/message_edited
+RewriteCond %{REQUEST_URI} ^/bot/message_edited
+RewriteCond %{REQUEST_METHOD} POST
+RewriteRule ^(.*)$ /index.php?route=bot/message_edited [QSA,L]
+
+# Перенаправление для bot/message_removed
+RewriteCond %{REQUEST_URI} ^/bot/message_removed
+RewriteCond %{REQUEST_METHOD} POST
+RewriteRule ^(.*)$ /index.php?route=bot/message_removed [QSA,L]

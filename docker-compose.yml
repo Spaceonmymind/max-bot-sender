@@ -1,0 +1,27 @@
+services:
+  max-bot:
+    build: .
+    container_name: max-bot
+    ports:
+      - "8080:80"
+    volumes:
+      - ./logs:/var/www/html/logs
+      - ./chats.csv:/var/www/html/chats.csv
+    depends_on:
+      - db
+    restart: unless-stopped
+
+  db:
+    image: mysql:8.0
+    container_name: max-bot-db
+    environment:
+      MYSQL_DATABASE: max_bot
+      MYSQL_USER: maxbot
+      MYSQL_PASSWORD: maxbot_password
+      MYSQL_ROOT_PASSWORD: root_password
+    volumes:
+      - mysql_data:/var/lib/mysql
+    restart: unless-stopped
+
+volumes:
+  mysql_data:

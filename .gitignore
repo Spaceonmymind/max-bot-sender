@@ -1,0 +1,11 @@
+/vendor
+/logs
+.env
+chats.csv
+
+docker-compose.override.yml
+
+.idea
+.vscode
+
+.DS_Store

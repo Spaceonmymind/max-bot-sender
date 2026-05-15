@@ -1,0 +1,5 @@
+{
+    "require": {
+        "bushlanov-dev/max-bot-api-client-php": "1.5.0"
+    }
+}
