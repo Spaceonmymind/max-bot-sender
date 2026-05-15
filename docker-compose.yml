@@ -14,16 +14,15 @@ services:
       - .env
 
   db:
-    image: mysql:8.0
+    image: mariadb:10.11
     container_name: max-bot-db
     environment:
-      MYSQL_DATABASE: max_bot
-      MYSQL_USER: maxbot
-      MYSQL_PASSWORD: maxbot_password
-      MYSQL_ROOT_PASSWORD: root_password
+      MARIADB_DATABASE: max_bot
+      MARIADB_USER: maxbot
+      MARIADB_PASSWORD: maxbot_password
+      MARIADB_ROOT_PASSWORD: root_password
     volumes:
       - mysql_data:/var/lib/mysql
     restart: unless-stopped
-
 volumes:
   mysql_data:
