@@ -29,10 +29,34 @@ function handleMessageCreated($api)
         $chatId = $message['recipient']['chat_id'];
         $api->sendAction($chatId, SenderAction::MarkSeen);
 
-        // Не отвечать на сообщения пользователя в личку
+        // Ответ пользователю в личном диалоге с ботом
         if ($message['recipient']['chat_type'] === 'dialog') {
+
+            $debugData = [
+                'date' => date('Y-m-d H:i:s'),
+                'user_id' => $message['sender']['user_id'] ?? null,
+                'username' => $message['sender']['username'] ?? null,
+                'first_name' => $message['sender']['first_name'] ?? null,
+                'last_name' => $message['sender']['last_name'] ?? null,
+                'chat_id' => $chatId,
+                'bot_id' => $BOT_ID,
+                'message_text' => $message['body']['text'] ?? null,
+            ];
+
+            file_put_contents(
+                __DIR__ . '/../logs/private_dialogs.log',
+                json_encode($debugData, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) . PHP_EOL,
+                FILE_APPEND
+            );
+
+            $api->sendMessage(
+                chatId: $chatId,
+                text: "Я электронный помощник Государственной жилищной инспекции Курганской области для информирования пользователей чатов многоквартирных домов.\n\n"
+                    . "Бот предназначен для размещения официальных информационных сообщений в домовых чатах МАХ.",
+            );
+
             return;
-        }
+}
 
         $userId = $message['sender']['user_id'];
         $original_mid = $message['body']['mid'];
