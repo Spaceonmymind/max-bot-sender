@@ -17,12 +17,12 @@ services:
       - "traefik.enable=true"
       - "traefik.docker.network=vi-common_vi"
       - "traefik.http.routers.max-bot.rule=Host(`sender-bot.vi.gov45.ru`)"
-      - "traefik.http.routers.max-bot.entrypoints=web"
+      - "traefik.http.routers.max-bot.entrypoints=http"
       - "traefik.http.routers.max-bot-secure.rule=Host(`sender-bot.vi.gov45.ru`)"
-      - "traefik.http.routers.max-bot-secure.entrypoints=websecure"
+      - "traefik.http.routers.max-bot-secure.entrypoints=https"
       - "traefik.http.routers.max-bot-secure.tls=true"
-      - "traefik.http.services.max-bot.loadbalancer.server.port=80"
       - "traefik.http.routers.max-bot-secure.tls.certresolver=letsEncrypt"
+      - "traefik.http.services.max-bot.loadbalancer.server.port=80"
 
   db:
     image: mariadb:10.11
