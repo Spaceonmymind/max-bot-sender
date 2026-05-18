@@ -2,8 +2,6 @@ services:
   max-bot:
     build: .
     container_name: max-bot
-    ports:
-      - "8080:80"
     volumes:
       - ./logs:/var/www/html/logs
       - ./chats.csv:/var/www/html/chats.csv
@@ -12,6 +10,18 @@ services:
     restart: unless-stopped
     env_file:
       - .env
+    networks:
+      - default
+      - vi-common_vi
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=vi-common_vi"
+      - "traefik.http.routers.max-bot.rule=Host(`sender-bot.vi.gov45.ru`)"
+      - "traefik.http.routers.max-bot.entrypoints=web"
+      - "traefik.http.routers.max-bot-secure.rule=Host(`sender-bot.vi.gov45.ru`)"
+      - "traefik.http.routers.max-bot-secure.entrypoints=websecure"
+      - "traefik.http.routers.max-bot-secure.tls=true"
+      - "traefik.http.services.max-bot.loadbalancer.server.port=80"
 
   db:
     image: mariadb:10.11
@@ -24,5 +34,10 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
     restart: unless-stopped
+
 volumes:
   mysql_data:
+
+networks:
+  vi-common_vi:
+    external: true
