@@ -61,6 +61,22 @@ function handleMessageCreated($api)
         $userId = $message['sender']['user_id'];
         $original_mid = $message['body']['mid'];
 
+        file_put_contents(
+            __DIR__ . '/../logs/debug_message_created.log',
+            print_r([
+                'chatId' => $chatId,
+                'userId' => $userId,
+                'BOT_ID' => $BOT_ID,
+                'MODERATOR_CHATS' => $MODERATOR_CHATS,
+                'ADMINS_USERS' => $ADMINS_USERS,
+                'MODERATORS_USERS' => $MODERATORS_USERS,
+                'in_chat' => in_array($chatId, $MODERATOR_CHATS),
+                'in_chat_str' => in_array((string)$chatId, $MODERATOR_CHATS),
+                'is_bot' => ($userId == $BOT_ID),
+            ], true) . PHP_EOL . PHP_EOL,
+            FILE_APPEND
+        );
+
         if (
             in_array($chatId, $MODERATOR_CHATS)
             && ($userId !== $BOT_ID)
