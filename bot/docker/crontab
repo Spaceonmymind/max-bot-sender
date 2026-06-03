@@ -1,4 +1,4 @@
-0 0 * * * php /var/www/html/chats_checker.php >> /var/www/html/logs/chats_checker_cron.log 2>&1
-* * * * * php /var/www/html/dispatcher.php >> /var/www/html/logs/dispatcher_cron.log 2>&1
-* * * * * php /var/www/html/executor.php >> /var/www/html/logs/executor_cron.log 2>&1
-* * * * * php /var/www/html/notificator.php >> /var/www/html/logs/notificator_cron.log 2>&1
+0 0 * * * root php /var/www/html/chats_checker.php >> /var/www/html/logs/chats_checker_cron.log 2>&1
+* * * * * root php /var/www/html/dispatcher.php >> /var/www/html/logs/dispatcher_cron.log 2>&1
+* * * * * root php /var/www/html/executor.php >> /var/www/html/logs/executor_cron.log 2>&1
+* * * * * root php /var/www/html/notificator.php >> /var/www/html/logs/notificator_cron.log 2>&1

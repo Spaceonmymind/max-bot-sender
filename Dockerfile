@@ -15,7 +15,7 @@ COPY . .
 RUN composer install --no-dev --optimize-autoloader
 
 COPY docker/crontab /etc/cron.d/max-bot-cron
-RUN chmod 0644 /etc/cron.d/max-bot-cron && crontab /etc/cron.d/max-bot-cron
+RUN chmod 0644 /etc/cron.d/max-bot-cron
 
 RUN mkdir -p /var/www/html/logs && chown -R www-data:www-data /var/www/html/logs
 
