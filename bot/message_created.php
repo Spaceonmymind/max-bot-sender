@@ -18,6 +18,12 @@ function handleMessageCreated($api)
     $input = file_get_contents('php://input');
     $updateData = json_decode($input, true);
 
+    file_put_contents(
+        __DIR__ . '/../logs/full_payload.log',
+        json_encode($updateData, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) . PHP_EOL . PHP_EOL,
+        FILE_APPEND
+    );
+
     if ($updateData === null) {
         http_response_code(400);
         echo 'Неверный JSON';
